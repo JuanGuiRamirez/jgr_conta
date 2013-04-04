@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inicio Privado{% endblock titulo %}
+
+{% block contenido %}	
+	<a href="{% url principal.views.cerrar_sesion %}">Cerrar Sesion</a>
+	<h1>Lista de Cuentas Pendientes</h1>	
+	<table class="table table-strip">
+		<thead>
+			<tr>
+				<td>Tercero</td>
+				<td>Concepto</td>
+				<td>Valor Total</td>
+				<td>Valor Abonos</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for cuenta in cuentas %}
+			<tr>
+				<td>{{cuenta.tercero}}</td>
+				<td>{{cuenta.concepto}}</td>
+				<td>{{cuenta.total_valor}}</td>
+				<td>{{cuenta.total_abono}}</td>
+				<td><a href="{% url principal.views.editar_cuenta cuenta.id %}" class="btn">Editar</a></td>
+			</tr>
+			{% empty %}
+			<td colspan="4">No hay Cuentas</td>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{% url principal.views.agregar_cuenta %}" class="btn btn-primary">Agregar Cuenta</a>
+
+
+{% endblock contenido %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block titulo %}Login{% endblock titulo %}
+
+{% block contenido %}
+	<center>
+		<h1>Debe iniciar sesión</h1>
+		<form method="post" action=".">  {% csrf_token %}
+			<h5>{{ mensaje }}</h5>
+			<table>{{ formulario }}</table>
+			<p><input class="btn btn-primary" type="submit"></p>
+		</form>
+	</center>
+{% endblock contenido %}
