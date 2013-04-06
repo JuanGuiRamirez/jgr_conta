@@ -5,3 +5,5 @@ class cxp( models.Model ):
 	concepto = models.CharField(max_length=200)
 	total_valor = models.FloatField()
 	total_abono = models.FloatField()
+	monto_total = models.FloatField() #default='0')#, required=false)
+

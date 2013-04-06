@@ -13,7 +13,7 @@ def index(request):
 	mensaje = ""
 	if request.user.is_authenticated():
 		return HttpResponseRedirect('/inicio')
-	else:		
+	else:	
 		if request.method == "POST":
 			formulario = loginForms( request.POST )
 			if formulario.is_valid():
@@ -39,6 +39,8 @@ def agregar_cuenta(request):
 	if request.method == "POST":
 		formulario_cuenta = cxpForms( request.POST )
 		if formulario_cuenta.is_valid():
+			ins_save = formulario_cuenta.save( commit = False)
+			ins_save.monto_total = (ins_save.total_valor - ins_save.total_abono)
 			formulario_cuenta.save()
 			return HttpResponseRedirect('/inicio')		
 	else:

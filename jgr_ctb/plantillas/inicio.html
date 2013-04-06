@@ -12,6 +12,7 @@
 				<td>Concepto</td>
 				<td>Valor Total</td>
 				<td>Valor Abonos</td>
+				<td>Monto Total</td>
 				<td></td>
 			</tr>
 		</thead>
@@ -21,11 +22,12 @@
 				<td>{{cuenta.tercero}}</td>
 				<td>{{cuenta.concepto}}</td>
 				<td>{{cuenta.total_valor}}</td>
-				<td>{{cuenta.total_abono}}</td>
-				<td><a href="{% url principal.views.editar_cuenta cuenta.id %}" class="btn">Editar</a></td>
+				<td>{{cuenta.total_abono}}</td>				
+				<td>{{cuenta.monto_total}}</td>				
+				<td><a href="{% url principal.views.editar_cuenta cuenta.id %}" class="btn">Editar</a> <a href="{% url principal.views.editar_cuenta cuenta.id %}" class="btn">Abonar</a></td>
 			</tr>
 			{% empty %}
-			<td colspan="4">No hay Cuentas</td>
+			<td colspan="6">No hay Cuentas</td>
 			{% endfor %}
 		</tbody>
 	</table>
