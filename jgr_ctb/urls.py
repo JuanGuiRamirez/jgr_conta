@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^agregar_cxp/$', 'principal.views.agregar_cuenta'),
     url(r'^salir/$', 'principal.views.cerrar_sesion'),
     url(r'^editar_cxp/(?P<cuenta_id>\d+)$', 'principal.views.editar_cuenta'),
+    url(r'^add_abono/(?P<cxp_id>\d+)$', 'principal.views.agregar_abono'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

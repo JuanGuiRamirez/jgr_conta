@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from principal.formularios import *
 from principal.models import *
 
+#==============================================================#
+
 def index(request):
 	mensaje = ""
 	if request.user.is_authenticated():
@@ -29,10 +31,14 @@ def index(request):
 		formulario = loginForms()
 		return render_to_response('index.html', {"formulario":formulario, "mensaje":mensaje}, context_instance=RequestContext(request))
 
+#==============================================================#
+
 @login_required(login_url='/')
 def inicio(request):
 	cuentas = cxp.objects.all()
 	return render_to_response('inicio.html', {'cuentas':cuentas}, context_instance=RequestContext(request))
+
+#==============================================================#
 
 @login_required(login_url='/')
 def agregar_cuenta(request):
@@ -48,10 +54,13 @@ def agregar_cuenta(request):
 
 	return render_to_response('agregar_cuenta.html', {'formulario':formulario_cuenta}, context_instance=RequestContext(request))
 
+#==============================================================#
 
 def cerrar_sesion(request):
 	logout(request)
 	return HttpResponseRedirect('/')
+
+#==============================================================#
 
 @login_required(login_url='/')
 def editar_cuenta(request, cuenta_id):
@@ -65,4 +74,23 @@ def editar_cuenta(request, cuenta_id):
 		formulario_cuenta = cxpForms(instance=cuenta)
 	return render_to_response('editar_cuenta.html', {'formulario':formulario_cuenta}, context_instance=RequestContext(request))
 
+#==============================================================#
 
+@login_required(login_url=('/'))
+def agregar_abono(request, cxp_id):
+	mensaje = ''
+	abonos = abono.objects.filter(cxp_id=cxp_id)
+	if request.method == "POST":
+		mensaje = 'true'
+		formulario = abonoForms( request.POST )
+		if formulario.is_valid:
+			mensaje = 'paso validar'
+			ins_save = formulario.save( commit = False )
+			ins_save.cxp_id_id = cxp_id
+			ins_save.save()
+			#formulario.save()
+			return HttpResponseRedirect("/inicio")
+	else:
+		mensaje = 'se fue false'
+		formulario = abonoForms()		
+	return render_to_response('agregar_abono.html', {"formulario":formulario, "abonos":abonos, "mensaje":mensaje}, context_instance=RequestContext(request))

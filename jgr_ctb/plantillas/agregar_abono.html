@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registrar Abono{% endblock titulo %}
+
+{% block contenido %}
+	<h1>Registrar Abono</h1>
+	<h5>{{ mensaje }}</h5>
+	<table class="table table-strip">
+		<tbody>
+			<tr>
+				<td>
+					<form method="post">{% csrf_token %}
+						{{ formulario.as_p }}		
+						<input class="btn btn-primary" type="submit">
+						<a href="{% url principal.views.inicio %}" class="btn">Volver</a>
+					</form>
+				</td>
+				<td></td>
+				<td>
+					<h5>Lista de Abonos</h5>
+					<table class="table table-strip">
+						<thead>
+							<tr>
+								<td>Monto</td>
+								<td>Saldo Inicial</td>
+								<td>Saldo Final</td>
+								<td>Fecha</td>
+							</tr>
+						</thead>
+						<tbody>
+							{% for abono in abonos %}
+								<tr>
+									<td>{{ abono.monto_abono }}</td>
+									<td>{{ abono.saldo_Inicial }}</td>
+									<td>{{ abono.saldo_final }}</td>
+									<td>{{ abono.fecha_abono }}</td>
+								</tr>
+							{% empty %}	
+								<td colspan="4">No hay abonos</td>
+							{% endfor %}
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock contenido %}
