@@ -88,7 +88,9 @@ def agregar_abono(request, cxp_id):
 			ins_save.cxp_id_id = cxp_id
 			ins_save.saldo_Inicial = cuenta_pagar.monto_total
 			ins_save.saldo_final = (ins_save.saldo_Inicial - ins_save.monto_abono)
-			ins_save.save()			
+			cuenta_pagar.monto_total = ins_save.saldo_final
+			ins_save.save()				
+			cuenta_pagar.save()		
 			return HttpResponseRedirect("/inicio")
 	else:		
 		formulario = abonoForms()		
