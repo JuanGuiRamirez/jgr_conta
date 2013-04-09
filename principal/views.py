@@ -77,20 +77,19 @@ def editar_cuenta(request, cuenta_id):
 #==============================================================#
 
 @login_required(login_url=('/'))
-def agregar_abono(request, cxp_id):
-	mensaje = ''
+def agregar_abono(request, cxp_id):	
+	cuenta_pagar = cxp.objects.get(pk=cxp_id)
 	abonos = abono.objects.filter(cxp_id=cxp_id)
 	if request.method == "POST":
 		mensaje = 'true'
 		formulario = abonoForms( request.POST )
-		if formulario.is_valid:
-			mensaje = 'paso validar'
+		if formulario.is_valid:			
 			ins_save = formulario.save( commit = False )
 			ins_save.cxp_id_id = cxp_id
-			ins_save.save()
-			#formulario.save()
+			ins_save.saldo_Inicial = cuenta_pagar.monto_total
+			ins_save.saldo_final = (ins_save.saldo_Inicial - ins_save.monto_abono)
+			ins_save.save()			
 			return HttpResponseRedirect("/inicio")
-	else:
-		mensaje = 'se fue false'
+	else:		
 		formulario = abonoForms()		
-	return render_to_response('agregar_abono.html', {"formulario":formulario, "abonos":abonos, "mensaje":mensaje}, context_instance=RequestContext(request))
+	return render_to_response('agregar_abono.html', {"formulario":formulario, "abonos":abonos, "cuenta":cuenta_pagar}, context_instance=RequestContext(request))

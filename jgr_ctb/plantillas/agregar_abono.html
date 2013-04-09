@@ -3,45 +3,100 @@
 {% block titulo %}Registrar Abono{% endblock titulo %}
 
 {% block contenido %}
-	<h1>Registrar Abono</h1>
-	<h5>{{ mensaje }}</h5>
-	<table class="table table-strip">
-		<tbody>
-			<tr>
-				<td>
-					<form method="post">{% csrf_token %}
-						{{ formulario.as_p }}		
-						<input class="btn btn-primary" type="submit">
-						<a href="{% url principal.views.inicio %}" class="btn">Volver</a>
-					</form>
-				</td>
-				<td></td>
-				<td>
-					<h5>Lista de Abonos</h5>
-					<table class="table table-strip">
-						<thead>
+<br>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span8 offset2">
+			<div class="well">
+				<center><h3>Administración de Abonos</h3></center>
+			</div>
+		</div>		
+	</div>
+	<div class="row-fluid">
+		<div class="span4 offset2" >
+			<div class="well">
+				<h4>Inf. de la Deuda</h3>
+				<h5>Tercero: {{ cuenta.tercero }}</h5>
+				<h5>{{ cuenta.concepto }}</h5>
+				<h5>{{ cuenta.total_valor }}</h5>
+				<h5>{{ cuenta.total_abono }}</h5>
+				<h5>{{ cuenta.monto_total }}</h5>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well">
+				<form method="post">{% csrf_token %}
+					{{ formulario.as_p }}		
+					<input class="btn btn-primary" type="submit">
+					<a href="{% url principal.views.inicio %}" class="btn">Volver</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span8 offset2">
+			<div class="well">
+				<center><h4>Lista de Abonos</h4></center>
+				<table class="table table-strip">
+					<thead>
+						<tr>
+							<td>Monto</td>
+							<td>Saldo Inicial</td>
+							<td>Saldo Final</td>
+							<td>Fecha</td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for abono in abonos %}
 							<tr>
-								<td>Monto</td>
-								<td>Saldo Inicial</td>
-								<td>Saldo Final</td>
-								<td>Fecha</td>
+								<td>{{ abono.monto_abono }}</td>
+								<td>{{ abono.saldo_Inicial }}</td>
+								<td>{{ abono.saldo_final }}</td>
+								<td>{{ abono.fecha_abono }}</td>
 							</tr>
-						</thead>
-						<tbody>
-							{% for abono in abonos %}
-								<tr>
-									<td>{{ abono.monto_abono }}</td>
-									<td>{{ abono.saldo_Inicial }}</td>
-									<td>{{ abono.saldo_final }}</td>
-									<td>{{ abono.fecha_abono }}</td>
-								</tr>
-							{% empty %}	
-								<td colspan="4">No hay abonos</td>
-							{% endfor %}
-						</tbody>
-					</table>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+						{% empty %}	
+							<td colspan="4">No hay abonos</td>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!--<h1>Administrar Abono</h1>	
+	<div class="row">
+		<div class="span3">
+			<form method="post">{% csrf_token %}
+				{{ formulario.as_p }}		
+				<input class="btn btn-primary" type="submit">
+				<a href="{% url principal.views.inicio %}" class="btn">Volver</a>
+			</form>
+		</div>
+		<div class="span8">
+			<h5>Lista de Abonos</h5>
+			<table class="table table-strip">
+				<thead>
+					<tr>
+						<td>Monto</td>
+						<td>Saldo Inicial</td>
+						<td>Saldo Final</td>
+						<td>Fecha</td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for abono in abonos %}
+						<tr>
+							<td>{{ abono.monto_abono }}</td>
+							<td>{{ abono.saldo_Inicial }}</td>
+							<td>{{ abono.saldo_final }}</td>
+							<td>{{ abono.fecha_abono }}</td>
+						</tr>
+					{% empty %}	
+						<td colspan="4">No hay abonos</td>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>	-->
 {% endblock contenido %}

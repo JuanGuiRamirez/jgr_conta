@@ -3,12 +3,16 @@
 {% block titulo %}Login{% endblock titulo %}
 
 {% block contenido %}
-	<center>
-		<h1>Debe iniciar sesión</h1>
-		<form method="post" action=".">  {% csrf_token %}
-			<h5>{{ mensaje }}</h5>					
-			<table>{{ formulario }}</table>
-			<p><input class="btn btn-primary" type="submit"></p>
-		</form>
-	</center>
+	<div class="container">
+		<div class="well">
+			<center>
+				<h1>Debe iniciar sesión</h1>
+				<form method="post" action=".">  {% csrf_token %}
+					<h5>{{ mensaje }}</h5>					
+					<table>{{ formulario }}</table>
+					<p><input class="btn btn-primary" type="submit"></p>
+				</form>
+			</center>
+		</div>
+	</div>
 {% endblock contenido %}
