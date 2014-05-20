@@ -6,6 +6,7 @@ class cxp( models.Model ):
 	total_valor = models.FloatField()
 	total_abono = models.FloatField()
 	monto_total = models.FloatField()
+	monto_neto = models.FloatField()
 
 
 class abono( models.Model ):
