@@ -5,7 +5,7 @@ import datetime
 
 class loginForms( forms.Form ):
 	username = forms.CharField(widget=forms.TextInput())
-	password = forms.CharField(widget=forms.PasswordInput())
+	password = forms.CharField(widgetss=forms.PasswordInput())
 
 class cxpForms( forms.ModelForm ):	
 	class Meta:
